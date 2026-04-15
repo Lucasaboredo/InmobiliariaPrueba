@@ -1,26 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-gold: #dc2626;  /* Red */
+  --brand-dark: #111111;  /* Black */
+  --brand-navy: #212121;  /* Dark gray */
+  --brand-cream: #ffffff; /* White */
+  --brand-slate: #666666; /* Neutral gray */
+  --brand-accent: #b91c1c; /* Darker red */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--brand-cream);
+  color: var(--brand-dark);
+}
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--brand-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand-gold);
+  border-radius: 4px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease forwards;
+}
+
+/* Hero gradient overlay */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 25, 35, 0.75) 0%,
+    rgba(26, 46, 68, 0.55) 50%,
+    rgba(15, 25, 35, 0.25) 100%
+  );
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+/* Property card hover */
+.property-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.property-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(15, 25, 35, 0.15);
+}
+
+/* Status badges */
+.badge-for_sale {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+.badge-rented {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+.badge-sold {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+/* WhatsApp button pulse */
+.whatsapp-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Search bar */
+.search-input {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus-within {
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+/* Button hover effects for Server Components */
+.btn-gold-hover {
+  background: var(--brand-gold);
+  transition: all 0.2s;
+}
+.btn-gold-hover:hover {
+  background: #b91c1c !important;
+  transform: scale(1.03);
+}
+
+.btn-whatsapp-hover {
+  background: #25d366;
+  transition: all 0.2s;
+  box-shadow: 0 8px 32px rgba(37,211,102,0.35);
+}
+.btn-whatsapp-hover:hover {
+  opacity: 0.9;
+  transform: scale(1.04);
+  box-shadow: 0 12px 40px rgba(37,211,102,0.5);
+}
+
+.btn-outline-gold {
+  border: 2px solid var(--brand-gold);
+  transition: all 0.2s;
+}
+.btn-outline-gold:hover {
+  background: var(--brand-gold) !important;
+}
+
+.nav-link-variant {
+  color: rgba(255,255,255,0.85);
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
+.nav-link-variant:hover {
+  color: var(--brand-gold) !important;
+  border-bottom-color: var(--brand-gold) !important;
+}
+
+.input-brand-focus {
+  transition: border-color 0.2s;
+}
+.input-brand-focus:focus {
+  border-color: var(--brand-gold) !important;
+  outline: none;
+}
+
+.card-why-us {
+  background: rgba(255,255,255,0.05);
+  transition: background 0.2s, border-color 0.2s;
+}
+.card-why-us:hover {
+  background: rgba(201,168,76,0.1) !important;
+  border-color: var(--brand-gold) !important;
+}
+
+.property-card-img {
+  transition: transform 0.4s ease !important;
+}
+
+.property-card-img:hover {
+  transform: scale(1.07) !important;
 }
