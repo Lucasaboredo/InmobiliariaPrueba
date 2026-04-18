@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import PropertyCard from '@/components/PropertyCard';
 import { Property, PropertyStatus, PropertyType } from '@/types/property';
+import { mockProperties } from '@/lib/mock-data';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
@@ -38,7 +39,16 @@ function PropertiesContent() {
       setTotal(data.meta?.total || 0);
       setTotalPages(data.meta?.totalPages || 1);
     } catch {
-      setProperties([]);
+      // Demo Fallback: if backend breaks or is unreachable from client (like on Vercel), use mock data
+      let filteredMocks = mockProperties;
+      if (search) filteredMocks = filteredMocks.filter(p => p.title.toLowerCase().includes(search.toLowerCase()) || p.location.toLowerCase().includes(search.toLowerCase()));
+      if (type) filteredMocks = filteredMocks.filter(p => p.type === type);
+      if (status) filteredMocks = filteredMocks.filter(p => p.status === status);
+      if (maxPrice) filteredMocks = filteredMocks.filter(p => p.price <= parseInt(maxPrice));
+      
+      setProperties(filteredMocks);
+      setTotal(filteredMocks.length);
+      setTotalPages(1);
     } finally {
       setLoading(false);
     }
