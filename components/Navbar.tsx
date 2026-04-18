@@ -43,20 +43,15 @@ export default function Navbar() {
           height: '80px',
         }}
       >
-        {/* Logo Text / Image Area */}
-        <Link href="/" style={{ textDecoration: 'none' }}>
-           <div className={`nav-brand ${isHome ? 'hide-mobile-brand' : ''}`} style={{ display: 'flex', alignItems: 'center' }}>
-             <img src="/logo.png" className="mobile-only-logo" style={{ height: '50px', objectFit: 'contain' }} alt="Inmobiliaria Logo" />
-             <div className="desktop-only-text">
-                <span style={{ color: 'white', fontWeight: 800, fontSize: '1.4rem', letterSpacing: '0.05em' }}>
-                  ANDREA DURE
-                </span>
-                <span style={{ color: 'var(--brand-gold)', fontWeight: 600, fontSize: '0.9rem', marginLeft: '8px', textTransform: 'uppercase', letterSpacing: '0.1em' }} className="hide-mobile-small">
-                  Inmobiliaria
-                </span>
-             </div>
-           </div>
-        </Link>
+        {/* Spacer / Brand Area for Mobile */}
+        {!isHome && (
+          <Link href="/" style={{ textDecoration: 'none' }} className="mobile-only-logo">
+            <img src="/logo.png" style={{ height: '50px', objectFit: 'contain' }} alt="Inmobiliaria Logo" />
+          </Link>
+        )}
+        
+        {/* Invisible spacer to keep menu centered if brand is hidden */}
+        <div style={{ width: '50px' }} className="desktop-spacer"></div>
 
         {/* Desktop Nav */}
         <ul

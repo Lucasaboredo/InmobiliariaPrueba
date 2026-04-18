@@ -22,15 +22,17 @@ export default function Hero() {
     <section
       style={{
         position: 'relative',
-        height: '100vh',
-        minHeight: '680px',
+        minHeight: '100vh',
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: '100px', // Ensures content starts after the 80px navbar
+        paddingBottom: '40px',
         overflow: 'hidden',
       }}
     >
-      {/* Background image */}
+      {/* Background image / gradient */}
       <div
         style={{
           position: 'absolute',
@@ -46,9 +48,11 @@ export default function Hero() {
           position: 'relative',
           zIndex: 10,
           textAlign: 'center',
-          padding: '80px 1.5rem 0', // Added 80px top padding to avoid header overlap
+          padding: '0 1.5rem',
           maxWidth: '900px',
           width: '100%',
+          marginTop: 'auto', // Pushes content into remaining safe space
+          marginBottom: 'auto',
         }}
       >
         <img 
