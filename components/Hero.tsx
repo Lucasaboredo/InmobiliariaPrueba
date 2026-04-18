@@ -35,12 +35,7 @@ export default function Hero() {
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=80')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          transform: 'scale(1.05)',
-          transition: 'transform 8s ease',
+          background: 'linear-gradient(135deg, var(--brand-dark), var(--brand-navy))',
         }}
       />
       {/* Overlay */}
@@ -57,20 +52,17 @@ export default function Hero() {
           width: '100%',
         }}
       >
-        <p
-          style={{
-            color: 'var(--brand-gold)',
-            fontSize: '0.85rem',
-            letterSpacing: '0.3em',
-            textTransform: 'uppercase',
-            marginBottom: '1rem',
-            fontWeight: 600,
+        <img 
+          src="/logo.png" 
+          alt="Inmobiliaria Logo" 
+          style={{ 
+            height: '140px', 
+            objectFit: 'contain', 
+            margin: '0 auto 2.5rem',
             opacity: 0,
-            animation: 'fadeInUp 0.6s ease 0.2s forwards',
-          }}
-        >
-          Gualeguaychú · Entre Ríos
-        </p>
+            animation: 'fadeInUp 0.6s ease 0.2s forwards'
+          }} 
+        />
 
         <h1
           className="font-display"

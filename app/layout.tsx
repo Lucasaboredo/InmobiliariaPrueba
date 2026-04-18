@@ -41,7 +41,7 @@ export default function RootLayout({
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.5rem' }}>
             <img src="/logo.png" alt="Inmobiliaria Logo" style={{ height: '70px', objectFit: 'contain' }} />
           </div>
-          <p style={{ fontSize: '0.875rem' }}>Gualeguaychú, Entre Ríos, Argentina</p>
+          <p style={{ fontSize: '0.875rem' }}>Concepción del Uruguay, Entre Ríos, Argentina</p>
           <p style={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>
             Tel: +54 3447 497062 &nbsp;|&nbsp; Email: contacto@inmobiliaria.com
           </p>
