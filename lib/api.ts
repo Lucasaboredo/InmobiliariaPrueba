@@ -3,11 +3,12 @@ import { mockProperties } from './mock-data';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
-// Vercel build safety: if API is localhost, don't attempt to fetch during cloud build
-const isVercelLocalhost = typeof process !== 'undefined' && process.env.VERCEL && API_URL.includes('localhost');
+// Vercel build safety: Prevent Next.js from throwing ECONNREFUSED during static generation
+const isLocalAPI = API_URL.includes('localhost') || API_URL.includes('127.0.0.1');
+const bypassFetch = isLocalAPI && process.env.NODE_ENV === 'production';
 
 export async function getFeaturedProperties(): Promise<Property[]> {
-  if (isVercelLocalhost) return mockProperties.filter(p => p.featured);
+  if (bypassFetch) return mockProperties.filter(p => p.featured);
   try {
     const res = await fetch(`${API_URL}/properties/featured`, {
       next: { revalidate: 60 },
@@ -20,7 +21,7 @@ export async function getFeaturedProperties(): Promise<Property[]> {
 }
 
 export async function getProperties(params?: URLSearchParams): Promise<PropertiesResponse> {
-  if (isVercelLocalhost) return { data: mockProperties, meta: { total: mockProperties.length, page: 1, limit: 12, totalPages: 1 } };
+  if (bypassFetch) return { data: mockProperties, meta: { total: mockProperties.length, page: 1, limit: 12, totalPages: 1 } };
   try {
     const query = params ? `?${params.toString()}` : '';
     const res = await fetch(`${API_URL}/properties${query}`, {
@@ -34,7 +35,7 @@ export async function getProperties(params?: URLSearchParams): Promise<Propertie
 }
 
 export async function getProperty(id: string): Promise<Property | null> {
-  if (isVercelLocalhost) return mockProperties.find(p => p.id === id) || null;
+  if (bypassFetch) return mockProperties.find(p => p.id === id) || null;
   try {
     const res = await fetch(`${API_URL}/properties/${id}`, {
       next: { revalidate: 60 },
