@@ -14,7 +14,7 @@ export async function getFeaturedProperties(): Promise<Property[]> {
       next: { revalidate: 60 },
     });
     if (!res.ok) return mockProperties.filter(p => p.featured);
-    return res.json();
+    return await res.json();
   } catch (error) {
     return mockProperties.filter(p => p.featured);
   }
@@ -28,7 +28,7 @@ export async function getProperties(params?: URLSearchParams): Promise<Propertie
       next: { revalidate: 30 },
     });
     if (!res.ok) return { data: mockProperties, meta: { total: mockProperties.length, page: 1, limit: 12, totalPages: 1 } };
-    return res.json();
+    return await res.json();
   } catch (error) {
     return { data: mockProperties, meta: { total: mockProperties.length, page: 1, limit: 12, totalPages: 1 } };
   }
@@ -41,7 +41,7 @@ export async function getProperty(id: string): Promise<Property | null> {
       next: { revalidate: 60 },
     });
     if (!res.ok) return mockProperties.find(p => p.id === id) || null;
-    return res.json();
+    return await res.json();
   } catch (error) {
     return mockProperties.find(p => p.id === id) || null;
   }

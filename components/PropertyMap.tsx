@@ -39,10 +39,10 @@ export default function PropertyMap({ properties, fullHeight = false }: { proper
   // Default center: Concepción del Uruguay
   const centerPosition: [number, number] = [-32.4839, -58.2372];
   
-  // Strict Bounds limitadas SOLO a Concepción del Uruguay
+  // Strict Bounds limitadas a Concepción del Uruguay (ampliadas para permitir mayor desplazamiento)
   const mapBounds: L.LatLngBoundsExpression = [
-    [-32.5100, -58.2600], // Sudoeste (Río/Costanera Sur)
-    [-32.4300, -58.1800], // Noreste (Ruta norte)
+    [-32.5500, -58.3200], // Sudoeste (Más al oeste y sur, abarcando suburbios)
+    [-32.4000, -58.1500], // Noreste (Hacia ruta 14)
   ];
 
   return (

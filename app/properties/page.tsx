@@ -122,14 +122,14 @@ function PropertiesContent() {
       {/* Grid */}
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '3rem 1.5rem' }}>
         {loading ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
             {[...Array(6)].map((_, i) => (
               <div key={i} style={{ height: '380px', background: '#e5e7eb', borderRadius: '16px', animation: 'pulse 1.5s ease-in-out infinite' }} />
             ))}
           </div>
         ) : properties.length > 0 ? (
           <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
               {properties.map((p) => <PropertyCard key={p.id} property={p} />)}
             </div>
 

@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -22,7 +25,7 @@ export default function Navbar() {
         right: 0,
         zIndex: 100,
         transition: 'all 0.3s ease',
-        background: scrolled || menuOpen
+        background: scrolled || menuOpen || !isHome
           ? 'rgba(15, 25, 35, 0.97)'
           : 'rgba(15, 25, 35, 0.3)',
         backdropFilter: 'blur(12px)',
@@ -40,16 +43,19 @@ export default function Navbar() {
           height: '80px',
         }}
       >
-        {/* Logo Text */}
+        {/* Logo Text / Image Area */}
         <Link href="/" style={{ textDecoration: 'none' }}>
-          <div>
-            <span style={{ color: 'white', fontWeight: 800, fontSize: '1.4rem', letterSpacing: '0.05em' }}>
-              ANDREA DURE
-            </span>
-            <span style={{ color: 'var(--brand-gold)', fontWeight: 600, fontSize: '0.9rem', marginLeft: '8px', textTransform: 'uppercase', letterSpacing: '0.1em' }} className="hide-mobile-small">
-              Inmobiliaria
-            </span>
-          </div>
+           <div className={`nav-brand ${isHome ? 'hide-mobile-brand' : ''}`} style={{ display: 'flex', alignItems: 'center' }}>
+             <img src="/logo.png" className="mobile-only-logo" style={{ height: '50px', objectFit: 'contain' }} alt="Inmobiliaria Logo" />
+             <div className="desktop-only-text">
+                <span style={{ color: 'white', fontWeight: 800, fontSize: '1.4rem', letterSpacing: '0.05em' }}>
+                  ANDREA DURE
+                </span>
+                <span style={{ color: 'var(--brand-gold)', fontWeight: 600, fontSize: '0.9rem', marginLeft: '8px', textTransform: 'uppercase', letterSpacing: '0.1em' }} className="hide-mobile-small">
+                  Inmobiliaria
+                </span>
+             </div>
+           </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -166,10 +172,17 @@ export default function Navbar() {
       )}
 
       <style>{`
+        .mobile-only-logo { display: none; }
+        .desktop-only-text { display: flex; align-items: center; }
+
         .mobile-menu-btn, .mobile-nav-menu { display: none; }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn, .mobile-nav-menu { display: block; }
+          
+          .mobile-only-logo { display: block; }
+          .desktop-only-text { display: none !important; }
+          .hide-mobile-brand { display: none !important; }
         }
         @media (max-width: 400px) {
           .hide-mobile-small { display: none !important; }

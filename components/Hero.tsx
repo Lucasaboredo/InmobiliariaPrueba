@@ -41,13 +41,12 @@ export default function Hero() {
       {/* Overlay */}
       <div className="hero-overlay" style={{ position: 'absolute', inset: 0 }} />
 
-      {/* Content */}
       <div
         style={{
           position: 'relative',
           zIndex: 10,
           textAlign: 'center',
-          padding: '0 1.5rem',
+          padding: '80px 1.5rem 0', // Added 80px top padding to avoid header overlap
           maxWidth: '900px',
           width: '100%',
         }}
@@ -55,6 +54,7 @@ export default function Hero() {
         <img 
           src="/logo.png" 
           alt="Inmobiliaria Logo" 
+          className="hero-logo"
           style={{ 
             height: '140px', 
             objectFit: 'contain', 
